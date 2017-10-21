@@ -16,30 +16,59 @@
         </div>
         
         <div class="row">
+            <div class="col-md-1"></div>
             <div class="col-md-3">
-                <h3>Choose a Cat</h3>
-                <ul id="catList">
-                </ul>
-            </div>
-            
-            <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-3"></div>
+                    <h3>Choose a Cat</h3>
+                </div>
+                <div class="row">
+                    <ul id="catList">
+                    </ul>
+                </div>             
+                <div class="row">
+                </div>
+                <div class="row">
+                    <button id="admin" style="text-align:left">Admin</button>
+                </div>
+                <div class="row">
+                    <div id="adminArea">
+                        <div class="form-group">
+                            <label for="newName">Name:</label>
+                            <input type="text" class="form-control" id="newName">                                      
+                        </div>
+                        <div class="form-group">
+                                <label for="newImage">URL:</label>
+                                <input type="url" class="form-control" id="newImage">                                      
+                            </div>
+                        <div class="form-group">
+                            <label for="newScore">Score:</label>
+                            <input type="number" class="form-control" id="newScore">                                      
+                        </div>
+                        <div>
+                            <button id="cancel" style="text-align:left">Cancel</button>                        
+                            <button id="save" style="text-align:left">Save</button>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-2"></div>
                     <div class="col-md-3">
                         <h3 id="catName"></h3>                                                        
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-1"></div>
                     <div class="col-md-6">
                         <img id="catImage" class="img-fluid" alt="Cat">
-                        </div>
                     </div>
+                </div>
                 <div class="row">
                     <br>
                 </div>
                 <div class="row">
-                    <div class="col-md-2"></div>
+                    <div class="col-md-1"></div>
                     <div class="col-md-2">
                         <button id="reset" style="text-align:left">Reset</button>
                     </div>

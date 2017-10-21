@@ -41,6 +41,7 @@ var octopus = {
         // Initialize views
         viewCatList.init();
         viewCatDetails.init();
+        viewAdminArea.init();
     },
 
     getCats: function() {
@@ -143,7 +144,55 @@ var viewCatDetails = {
     }
 }
 
-/* // Count each click
+/* ======= View (Admin Area) ======= */
+
+var viewAdminArea = {
+    
+        init: function() {
+
+            // Use this to show/hide admin area
+            var adminElem = document.getElementById("adminArea");
+            
+            // Handler for clicking admin button
+            this.buttonElem = document.getElementById("admin");
+            this.buttonElem.addEventListener('click', (function() {
+                return function() {
+                    // View admin area
+                    adminElem.style.display = "block";                
+                }
+            })(this));
+
+            // Handler for clicking cancel button
+            this.buttonElem = document.getElementById("cancel");
+            this.buttonElem.addEventListener('click', (function() {
+                return function() {
+                    // Hide admin area
+                    adminElem.style.display = "none";                
+                }
+            })(this));
+
+            // Handler for clicking save button
+            this.buttonElem = document.getElementById("save");
+            this.buttonElem.addEventListener('click', (function() {
+                return function() {
+                    // Hide admin area
+                    adminElem.style.display = "none";                
+                }
+            })(this));
+        },
+
+        show: function() {
+            // View admin area
+            this.adminElem.style.display = "block";                
+        },
+    
+        hide: function() {
+            // Hide admin area
+            this.adminElem.style.display = "none";                
+        },
+    
+    }
+    /* // Count each click
 $( "#catImage" ).on("click",function() {
     catScores[cat]++;
     scoreElem.innerText = "Clicks:" + catScores[cat];
