@@ -44,28 +44,56 @@ var octopus = {
         viewAdminArea.init();
     },
 
+    // Returns array of all cats
     getCats: function() {
         return model.cats;
     },
 
+    // Returns current cat
     getCurrentCat: function() {
         return model.cat;
     },
 
+    // Changes which cat is current
     setCurrentCat: function(newCat) {
         model.cat = newCat;
-        viewCatDetails.render();         
+        viewCatDetails.render(); 
+        viewAdminArea.render();        
+    },
+
+    // Changes name of cat in model
+    setCurrentCatName: function(newName) {
+        model.cat.catName = newName;
+        viewCatList.render();
+        viewCatDetails.render(); 
+        viewAdminArea.render();        
+    },
+
+    // Changes image of cat in model
+    setCurrentCatImage: function(newImage) {
+        model.cat.catImage = newImage;
+        viewCatDetails.render(); 
+        viewAdminArea.render();        
+    },
+
+    // Changes score of cat in model
+    setCurrentCatScore: function(newScore) {
+        model.cat.catScore = newScore;
+        viewCatDetails.render(); 
+        viewAdminArea.render();        
     },
 
     // Increment counter for current cat
     incrementCat: function() {
         model.cat.catScore++;
         viewCatDetails.render();
+        viewAdminArea.render();        
     },
     // Reset counter for current cat
     resetCat: function() {
         model.cat.catScore = 0;
         viewCatDetails.render();         
+        viewAdminArea.render();        
     }
 }
 
@@ -151,14 +179,22 @@ var viewAdminArea = {
         init: function() {
 
             // Use this to show/hide admin area
-            var adminElem = document.getElementById("adminArea");
+            this.adminElem = document.getElementById("adminArea");
             
+            // Use these to change cat name, image or score in admin area
+            this.nameElem = document.getElementById("newName");
+            this.imageElem = document.getElementById("newImage")
+            this.scoreElem = document.getElementById("newScore");
+
             // Handler for clicking admin button
             this.buttonElem = document.getElementById("admin");
             this.buttonElem.addEventListener('click', (function() {
-                return function() {
-                    // View admin area
-                    adminElem.style.display = "block";                
+                return function() {                                
+                    // Fill in current cat name, image and score
+                    viewAdminArea.render();
+
+                    // Make admin area visible
+                    viewAdminArea.show();                
                 }
             })(this));
 
@@ -167,7 +203,7 @@ var viewAdminArea = {
             this.buttonElem.addEventListener('click', (function() {
                 return function() {
                     // Hide admin area
-                    adminElem.style.display = "none";                
+                    viewAdminArea.hide();                
                 }
             })(this));
 
@@ -175,22 +211,36 @@ var viewAdminArea = {
             this.buttonElem = document.getElementById("save");
             this.buttonElem.addEventListener('click', (function() {
                 return function() {
+
+                    // Update cat name, image and score in model
+                    octopus.setCurrentCatName (viewAdminArea.nameElem.value);
+                    octopus.setCurrentCatImage (viewAdminArea.imageElem.value);
+                    octopus.setCurrentCatScore (viewAdminArea.scoreElem.value);
+
                     // Hide admin area
-                    adminElem.style.display = "none";                
+                    viewAdminArea.hide();                
                 }
             })(this));
         },
 
         show: function() {
-            // View admin area
-            this.adminElem.style.display = "block";                
+            this.adminElem.style.display = "block";
         },
-    
+
         hide: function() {
-            // Hide admin area
-            this.adminElem.style.display = "none";                
+            this.adminElem.style.display = "none";
         },
-    
+
+        render: function() {
+
+            // Fill in current cat name, image and score
+            var currentCat = octopus.getCurrentCat();
+            this.nameElem.value = currentCat.catName;
+            this.imageElem.value = currentCat.catImage;
+            this.scoreElem.value = currentCat.catScore; 
+
+        }
+
     }
     /* // Count each click
 $( "#catImage" ).on("click",function() {
